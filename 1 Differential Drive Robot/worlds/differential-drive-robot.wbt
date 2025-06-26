@@ -1,0 +1,153 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.2362110415425816 0.48157102579714695 0.8439749350342416 1.0529438632479151
+  position -1.196623259025369 -1.431197474223548 1.1574055943109638
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+Robot {
+  children [
+    Solid {
+      translation 0 0 0.015
+      children [
+        Transform {
+          scale 0.01 0.01 0.01
+          children [
+            Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+              }
+              geometry Mesh {
+                url [
+                  "../meshes/base_link.obj"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+      name "base_link"
+      boundingObject Cylinder {
+        height 0.02
+        radius 0.05
+      }
+      physics Physics {
+        density -1
+        mass 0.5
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.045 0.015
+      }
+      device [
+        RotationalMotor {
+          name "motor2"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.045 0.015
+        rotation 0.9999999999999999 0 0 1.570000001702732
+        children [
+          DEF wheel Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/wheel.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject Cylinder {
+          height 0.008
+          radius 0.0145
+        }
+        physics Physics {
+          density -1
+          mass 0.03
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.045 0.015
+      }
+      device [
+        RotationalMotor {
+          name "motor1"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.045 0.015
+        rotation 1 0 0 1.5699999986057447
+        children [
+          DEF wheel Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/wheel.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "right wheel"
+        boundingObject Cylinder {
+          height 0.008
+          radius 0.0145
+        }
+        physics Physics {
+          density -1
+          mass 0.03
+        }
+      }
+    }
+  ]
+  name "Differential Drive Robot"
+  boundingObject Pose {
+    translation 0 0 0.015
+    children [
+      Cylinder {
+        height 0.027
+        radius 0.05
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  controller "diff_controller"
+}
