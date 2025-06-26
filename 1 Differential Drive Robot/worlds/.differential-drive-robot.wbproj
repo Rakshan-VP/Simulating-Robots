@@ -8,6 +8,5 @@ projectionMode: PERSPECTIVE
 renderingMode: PLAIN
 orthographicViewHeight: 1
 textFiles: -1
-robotWindow: Differential Drive Robot
 globalOptionalRendering: CoordinateSystem::JointAxes
 consoles: Console:All:All
