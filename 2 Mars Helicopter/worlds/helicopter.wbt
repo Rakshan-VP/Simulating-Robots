@@ -1,0 +1,107 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.1342734862520496 -0.13809560863860915 -0.9812748003309024 4.721533643174661
+  position 0.06497626760044006 -5.841321716879779 1.6073718460981044
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorAppearance Parquetry {
+    type "dark strip"
+  }
+}
+DEF MARS_HELICOPTER Robot {
+  translation 0 0 0.045
+  children [
+    Transform {
+      scale 0.01 0.01 0.01
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.5 0.4
+            roughness 0.25
+            emissiveColor 0.8 0.3 0.1
+          }
+          geometry Mesh {
+            url [
+              "../meshes/Body.obj"
+            ]
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0 0 0.12
+      }
+      device [
+        RotationalMotor {
+          name "motor top"
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF ROTOR_TOP_CW Solid {
+        translation 0 0 0.12
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.5 0.5 0.5
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Propeller.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "rotor top cw"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.2
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.025
+        }
+      }
+    }
+  ]
+  boundingObject Pose {
+    translation 0 0 0.04
+    children [
+      Box {
+        size 0.1 0.1 0.17
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.45
+  }
+  controller "control"
+  supervisor TRUE
+}
