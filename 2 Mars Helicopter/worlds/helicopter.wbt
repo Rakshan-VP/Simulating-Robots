@@ -8,8 +8,9 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.1342734862520496 -0.13809560863860915 -0.9812748003309024 4.721533643174661
-  position 0.06497626760044006 -5.841321716879779 1.6073718460981044
+  orientation 0.06083154290152445 -0.06319378875992981 -0.9961456060488272 4.746573713478492
+  position -0.01903267630373187 -6.5760856695913095 1.1911370189195212
+  follow "robot"
 }
 TexturedBackground {
 }
@@ -73,7 +74,56 @@ DEF MARS_HELICOPTER Robot {
             ]
           }
         ]
-        name "rotor top cw"
+        name "rotor top cw(1)"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.2
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.025
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0 0 0.11
+      }
+      device [
+        RotationalMotor {
+          name "motor bottom"
+          maxVelocity 100
+        }
+      ]
+      endPoint DEF ROTOR_BOTTOM_CCW Solid {
+        translation 0 0 0.11
+        rotation 0 0 1 1.57
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.5 0.5 0.5
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Propeller.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "rotor bottom ccw"
         boundingObject Pose {
           translation 0 0 0.0025
           children [
@@ -102,6 +152,6 @@ DEF MARS_HELICOPTER Robot {
     density -1
     mass 0.45
   }
-  controller "control"
+  controller "control1"
   supervisor TRUE
 }
