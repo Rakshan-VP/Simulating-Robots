@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.12099162052789139 -0.12428044464146835 -0.9848428295122797 4.723912604669695
-  position -0.37366958565555497 -9.929681320682116 2.982814099417938
+  orientation 0.11242452528318134 -0.12034981145371337 -0.9863450963014451 4.76670973585195
+  position 0.1762401190372147 -7.608697447855719 1.4043772014101714
   follow "robot"
 }
 TexturedBackground {
@@ -42,9 +42,34 @@ DEF MARS_HELICOPTER Robot {
         }
       ]
     }
+    DEF HEIGHT_SENSOR_MOUNT Solid {
+      translation 0 0 0.0025
+      rotation 0 1 0 1.57
+      children [
+        DistanceSensor {
+          name "height sensor"
+          lookupTable [
+            0 0 0
+            10 10 0
+          ]
+          type "infra-red"
+          numberOfRays 5
+          aperture 0.2
+          gaussianWidth 0.5
+          resolution 0.001
+        }
+      ]
+      boundingObject Sphere {
+        radius 0.01
+      }
+      physics Physics {
+        density -1
+        mass 0.001
+      }
+    }
     HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 0 -1
+        axis 0 0 1
         anchor 0 0 0.12
       }
       device [
@@ -55,7 +80,6 @@ DEF MARS_HELICOPTER Robot {
       ]
       endPoint DEF ROTOR_TOP_CW Solid {
         translation 0 0 0.12
-        rotation 0 0 -1 0
         children [
           Transform {
             scale 0.01 0.01 0.01
@@ -93,7 +117,7 @@ DEF MARS_HELICOPTER Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 0 1
+        axis 0 0 -1
         anchor 0 0 0.11
       }
       device [
@@ -104,7 +128,7 @@ DEF MARS_HELICOPTER Robot {
       ]
       endPoint DEF ROTOR_BOTTOM_CCW Solid {
         translation 0 0 0.11
-        rotation 0 0 1 1.57
+        rotation 0 0 1 1.5700000000000087
         children [
           Transform {
             scale 0.01 0.01 0.01
@@ -153,6 +177,6 @@ DEF MARS_HELICOPTER Robot {
     density -1
     mass 0.45
   }
-  controller "control1"
+  controller "altitude_control"
   supervisor TRUE
 }
