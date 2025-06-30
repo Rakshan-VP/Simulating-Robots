@@ -1,0 +1,49 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "../protos/dronepad.proto"
+EXTERNPROTO "../protos/SquareFence.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.005230496842351114 0.9996796896102214 -0.024762069452971783 0.41592855946534224
+  position -161.8493541735606 4.597722721714846 64.4338742016358
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 100 95
+  floorAppearance Parquetry {
+  }
+}
+Transform {
+  translation 2.5 0 0.01
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+        texture ImageTexture {
+          url [
+            "../terrain_texture_zup_90x90.png"
+          ]
+        }
+      }
+      geometry Box {
+        size 90 90 0.1
+      }
+    }
+  ]
+}
+DronePad {
+  translation -46 0 0.05
+}
+SquareFence {
+  translation 2.5 0 0
+}

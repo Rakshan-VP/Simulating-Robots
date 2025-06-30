@@ -1,0 +1,115 @@
+#VRML_SIM R2025a utf8
+
+PROTO SquareFence [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 0 1 0
+  field SFColor color 0.3 0.3 0.3
+] {
+  Transform {
+    translation IS translation
+    rotation IS rotation
+    children [
+
+      # North wall
+      Solid {
+        translation 0 45.25 0.75
+        name "Fence_North"
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor IS color
+              }
+            }
+            geometry Box {
+              size 91 0.5 1.5
+            }
+          }
+        ]
+        boundingObject Box {
+          size 91 0.5 1.5
+        }
+        physics Physics {
+          mass 250
+          density -1
+        }
+      }
+
+      # South wall
+      Solid {
+        translation 0 -45.25 0.75
+        name "Fence_South"
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor IS color
+              }
+            }
+            geometry Box {
+              size 91 0.5 1.5
+            }
+          }
+        ]
+        boundingObject Box {
+          size 91 0.5 1.5
+        }
+        physics Physics {
+          mass 250
+          density -1
+        }
+      }
+
+      # East wall
+      Solid {
+        translation 45.25 0 0.75
+        name "Fence_East"
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor IS color
+              }
+            }
+            geometry Box {
+              size 0.5 91 1.5
+            }
+          }
+        ]
+        boundingObject Box {
+          size 0.5 91 1.5
+        }
+        physics Physics {
+          mass 250
+          density -1
+        }
+      }
+
+      # West wall
+      Solid {
+        translation -45.25 0 0.75
+        name "Fence_West"
+        children [
+          Shape {
+            appearance Appearance {
+              material Material {
+                diffuseColor IS color
+              }
+            }
+            geometry Box {
+              size 0.5 91 1.5
+            }
+          }
+        ]
+        boundingObject Box {
+          size 0.5 91 1.5
+        }
+        physics Physics {
+          mass 250
+          density -1
+        }
+      }
+
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+#VRML_SIM R2025a utf8
+
+PROTO DronePad [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 0 1 0
+  field SFColor color 0.9 0.5 0.1  # warm orange
+  field MFNode  children []
+] {
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    children [
+      Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor IS color
+            specularColor 0.2 0.2 0.2
+            shininess 0.7
+          }
+        }
+        geometry Cylinder {
+          height 0.1
+          radius 1.5
+          subdivision 48
+        }
+      }
+      # Optional children (e.g., text or markers)
+      Group {
+        children IS children
+      }
+    ]
+    name "DronePad"
+    boundingObject Cylinder {
+      height 0.1
+      radius 1.5
+    }
+    physics Physics {
+      mass 0.5
+      density -1
+    }
+  }
+}

@@ -1,0 +1,263 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.022738249528974255 0.9232203948163283 -0.38359754248892286 0.1281115639377382
+  position -1.833971204751955 0.04651528111027267 0.15617860046038362
+  follow "quadcopter"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorAppearance Parquetry {
+  }
+  wallHeight 0.03
+}
+DEF QUADCOPTER Robot {
+  children [
+    Transform {
+      translation 0 0 0.03
+      scale 0.01 0.01 0.01
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.8 0
+            roughness 1
+          }
+          geometry Mesh {
+            url [
+              "../meshes/body.obj"
+            ]
+          }
+        }
+      ]
+    }
+    DEF prop1 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.1 -0.1 0.047
+      }
+      device [
+        RotationalMotor {
+          name "motor 1"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.1 -0.1 0.047
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.75 0.75 0.75
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Prop_ccw.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "prop1ccw"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.055
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.02
+        }
+      }
+    }
+    DEF prop3 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.1 0.1 0.047
+      }
+      device [
+        RotationalMotor {
+          name "motor 3"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.1 0.1 0.047
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.75 0.75 0.75
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Prop_ccw.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "prop3ccw"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.055
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.02
+        }
+      }
+    }
+    DEF prop2 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 -1
+        anchor -0.1 0.1 0.047
+      }
+      device [
+        RotationalMotor {
+          name "motor 2"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.1 0.1 0.047
+        rotation 0 0 -1 0
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.75 0.75 0.75
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Prop_cw.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "prop2cw"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.055
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.02
+        }
+      }
+    }
+    DEF prop4 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 -1
+        anchor 0.1 -0.1 0.047
+      }
+      device [
+        RotationalMotor {
+          name "motor 4"
+          maxVelocity 100
+        }
+      ]
+      endPoint Solid {
+        translation 0.1 -0.1 0.047
+        rotation 0 0 -1 0
+        children [
+          Transform {
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.75 0.75 0.75
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/Prop_cw.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        name "prop4cw"
+        boundingObject Pose {
+          translation 0 0 0.0025
+          children [
+            Cylinder {
+              height 0.005
+              radius 0.055
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.02
+        }
+      }
+    }
+  ]
+  name "quadcopter"
+  boundingObject Pose {
+    translation 0 0 0.05
+    children [
+      Shape {
+        geometry Box {
+          size 0.24 0.24 0.1
+        }
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.5
+    centerOfMass [
+      0 0 0
+    ]
+    inertiaMatrix [
+      0.0015 0.0015 0.0002
+      0 0 0
+    ]
+  }
+  controller "control"
+  supervisor TRUE
+}
