@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.022738249528974255 0.9232203948163283 -0.38359754248892286 0.1281115639377382
-  position -1.833971204751955 0.04651528111027267 0.15617860046038362
+  orientation -0.1503141916063342 0.20384252867706484 0.9673954038056383 1.3026173457982102
+  position -0.22183830218833692 -0.9489841201424745 0.3110497945257358
   follow "quadcopter"
 }
 TexturedBackground {
@@ -40,6 +40,32 @@ DEF QUADCOPTER Robot {
           }
         }
       ]
+    }
+    InertialUnit {
+      translation 0 0 0.045
+      rotation 0 0 1 3.14
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.6 0.8 0.3
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.02 0.02 0.005
+          }
+        }
+      ]
+      name "imu"
+      boundingObject Box {
+        size 0.02 0.02 0.005
+      }
+      physics Physics {
+        density -1
+        mass 0.03
+      }
+      noise 0.005
+      resolution 0.001
     }
     DEF prop1 HingeJoint {
       jointParameters HingeJointParameters {
@@ -258,6 +284,6 @@ DEF QUADCOPTER Robot {
       0 0 0
     ]
   }
-  controller "control"
+  controller "imu"
   supervisor TRUE
 }
