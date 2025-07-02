@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.18472061403818274 0.18657934656317254 0.9649178421945654 1.596509014371246
-  position 0.016640454896317172 -1.0261456613743016 0.406774867517056
+  orientation -0.022264368944154386 0.02470607078445998 0.999446800956365 1.467599609955159
+  position -0.039793827051725246 -1.046153327265878 0.10655023079562596
   follow "quadcopter"
 }
 TexturedBackground {
@@ -24,6 +24,61 @@ RectangleArena {
 }
 DEF QUADCOPTER Robot {
   children [
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.08 0 0.02
+      }
+      jointParameters2 JointParameters {
+        axis 0 -1 0
+      }
+      device [
+        RotationalMotor {
+          name "axis1motor"
+          minPosition -1.5708
+          maxPosition 1.5708
+        }
+      ]
+      device2 [
+        RotationalMotor {
+          name "axis2motor"
+          minPosition -1.57
+          maxPosition 1.57
+        }
+      ]
+      endPoint Camera {
+        translation 0.08 0 0.02
+        rotation 0 1 0 1.5708
+        children [
+          Transform {
+            translation -0.003 0 0
+            rotation 0 1 0 1.5708
+            scale 0.01 0.01 0.01
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.2 0.4 0.8
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url [
+                    "../meshes/camera.obj"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+        fieldOfView 1.047
+        width 640
+        height 480
+        far 100
+        exposure 1.2
+        ambientOcclusionRadius 0.5
+        noise 0.01
+      }
+    }
     GPS {
       translation 0.05 0 0.055
       children [
@@ -320,6 +375,6 @@ DEF QUADCOPTER Robot {
       0 0 0
     ]
   }
-  controller "gps"
+  controller "camera"
   supervisor TRUE
 }
