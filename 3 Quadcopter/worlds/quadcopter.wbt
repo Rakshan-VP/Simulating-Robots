@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.1503141916063342 0.20384252867706484 0.9673954038056383 1.3026173457982102
-  position -0.22183830218833692 -0.9489841201424745 0.3110497945257358
+  orientation -0.18472061403818274 0.18657934656317254 0.9649178421945654 1.596509014371246
+  position 0.016640454896317172 -1.0261456613743016 0.406774867517056
   follow "quadcopter"
 }
 TexturedBackground {
@@ -24,6 +24,42 @@ RectangleArena {
 }
 DEF QUADCOPTER Robot {
   children [
+    GPS {
+      translation 0.05 0 0.055
+      children [
+        Transform {
+          translation 0 0 -0.02
+          scale 0.01 0.01 0.01
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.6 0.6 0.6
+                roughness 1
+                metalness 0
+              }
+              geometry Mesh {
+                url [
+                  "../meshes/gps.obj"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+      boundingObject Cylinder {
+        height 0.03
+        radius 0.025
+      }
+      physics Physics {
+        density -1
+        mass 0.07
+      }
+      accuracy 1
+      noiseCorrelation 0.8
+      resolution 0.01
+      speedNoise 0.2
+      speedResolution 0.05
+    }
     Transform {
       translation 0 0 0.03
       scale 0.01 0.01 0.01
@@ -284,6 +320,6 @@ DEF QUADCOPTER Robot {
       0 0 0
     ]
   }
-  controller "imu"
+  controller "gps"
   supervisor TRUE
 }
